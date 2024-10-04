@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 import yfinance as yf
 from flask_cors import CORS
 from datetime import datetime, timedelta
+import pytz
 
 app = Flask(__name__)
 CORS(app)
@@ -17,10 +18,10 @@ def get_stock_data():
 
     if not start_date:
         # Default to 3 months ago if start date is not provided
-        start_date = (datetime.now() - timedelta(days=90)).strftime('%Y-%m-%d')
+        start_date = (datetime.now(pytz.UTC) - timedelta(days=90)).strftime('%Y-%m-%d')
 
     if not end_date:
-        end_date = datetime.now().strftime('%Y-%m-%d')
+        end_date = datetime.now(pytz.UTC).strftime('%Y-%m-%d')
 
     try:
         stock = yf.Ticker(symbol)
