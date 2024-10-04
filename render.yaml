@@ -2,8 +2,8 @@ services:
   - type: web
     name: flask-stock-api
     env: python
-    buildCommand: pip install -r yfinequities/requirements.txt
-    startCommand: gunicorn --chdir yfinequities app:app
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
     envVars:
       - key: PYTHON_VERSION
-        value: 3.9.0
+        value: 3.11.0
