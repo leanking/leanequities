@@ -3,6 +3,7 @@ import yfinance as yf
 from flask_cors import CORS
 from datetime import datetime, timedelta
 import pytz
+import os
 
 app = Flask(__name__)
 CORS(app)
@@ -43,4 +44,5 @@ def get_stock_data():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 10000))
+    app.run(host='0.0.0.0', port=port)
